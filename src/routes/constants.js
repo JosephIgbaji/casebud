@@ -1,0 +1,12 @@
+// export const LOGIN = "/";
+export const LOGIN = "/signin";
+export const REGISTER = "/register";
+export const DASHBOARD = "/dashboard";
+export const OVERVIEW = "/dashboard/overview";
+export const CASES = "/dashboard/cases";
+export const REPORTS = "/dashboard/reports";
+export const NOTIFICATIONS = "/dashboard/notifications";
+export const SETTINGS = "/dashboard/settings";
+export const HELP = "/dashboard/help";
+export const CASEDETAIL = "/dashboard/cases/:id";
+export const UPCOMINGTASKS = "/dashboard/upcoming-tasks";
