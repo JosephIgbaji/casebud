@@ -15,7 +15,7 @@ const Sidebar = ({ sidebarItems }) => {
   const navigate = useNavigate();
 
   function logout(i) {
-    if (i == 4) {
+    if (i == 2) {
       dispatch(logoutUser());
       showAlert("You logged out", "You can login again", "error");
     }
