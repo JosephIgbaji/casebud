@@ -2,28 +2,40 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 const Barchart = ({ obj }) => {
-  // const labels = [
-  //   "JAN",
-  //   "FEB",
-  //   "MAR",
-  //   "APR",
-  //   "MAY",
-  //   "JUN",
-  //   "JUL",
-  //   "AUG",
-  //   "SEP",
-  //   "OCT",
-  //   "NOV",
-  //   "DEC",
-  // ];
+  const labels = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
 
-  const labels = obj.map((dt) => {
-    return dt.month;
-  });
+  // const labels = obj.map((dt) => {
+  //   return dt.month;
+  // });
 
-  const data = obj.map((dt) => {
-    return dt.count;
-  });
+  let data = [];
+
+  for (let i = 0; i < labels.length; i++) {
+    obj.map((dt) => {
+      if (labels[i] == dt.month) {
+        data.push(dt.count);
+      } else {
+        data.push(0);
+      }
+    });
+  }
+
+  // concountst data = obj.map((dt) => {
+  //   return dt.count;
+  // });
 
   const options = {
     responsive: true,
