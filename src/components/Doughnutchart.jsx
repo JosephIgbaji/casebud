@@ -63,7 +63,7 @@ const Doughnutchart = ({ dt, innerTitle }) => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(`${dt}`, xCoor, yCoor);
+      ctx.fillText(``, xCoor, yCoor);
       ctx.restore();
     },
   };
@@ -82,7 +82,7 @@ const Doughnutchart = ({ dt, innerTitle }) => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(`${innerTitle} cases`, xCoor, yCoor);
+      // ctx.fillText(`${innerTitle} cases`, xCoor, yCoor);
       ctx.restore();
     },
   };

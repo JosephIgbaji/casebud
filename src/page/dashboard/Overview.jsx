@@ -50,6 +50,7 @@ const Overview = () => {
   // console.log("Monthyly: ", monthly?.data);
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState("");
+  const [ttl, setTtl] = useState("Total");
 
   const navigate = useNavigate();
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
@@ -64,9 +65,10 @@ const Overview = () => {
   //   }
   // };
 
-  const handleChange = (event) => {
-    console.log(event.target.value);
+  const handleChange = (event, name) => {
+    // console.log(event.target.value);
     setValue(event.target.value);
+    // setTtl(name);
   };
 
   const dailyRef = useRef();
@@ -344,16 +346,18 @@ const Overview = () => {
                         value={totalCase?.data?.totalcaseCount}
                         control={<Radio />}
                         label="Total"
+                        onClick={() => setTtl("Total")}
                         // onClick={(e) => handleChange(e)}
                       />
                       <FormControlLabel
                         // onClick={(e) => handleChange(e)}
+                        onClick={() => setTtl("Closed")}
                         control={<Radio />}
                         value={totalCase?.data?.totalClosedCase}
                         label="Closed"
                       />
                       <FormControlLabel
-                        // onClick={(e) => handleChange(e)}
+                        onClick={() => setTtl("Open")}
                         value={totalCase?.data?.totalOpenCase}
                         control={<Radio />}
                         label="Open"
@@ -378,6 +382,11 @@ const Overview = () => {
                       dt={value ? value : totalCase?.data?.totalcaseCount}
                       innerTitle={""}
                     />
+                  )}
+                  {totalCase?.data?.totalcaseCount && (
+                    <p className="pl-2">
+                      {ttl}: {value ? value : totalCase?.data?.totalcaseCount}
+                    </p>
                   )}
                 </div>
 
