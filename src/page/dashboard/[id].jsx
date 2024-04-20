@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { pdf, xlsx, docx, jpeg } from "../../assets";
 import noImage from "../../assets/cases/no-image.svg";
 import horizontalLine from "../../assets/cases/horizontal-color-line.png";
 import download from "../../assets/cases/download.svg";
@@ -11,7 +12,7 @@ const CaseDetails = () => {
   // const { params } = useParams();
   const { id } = useParams();
   const { data: mycase } = useGetAllCaseQuery();
-  // console.log(mycase?.data?.allCase);
+  console.log(mycase?.data?.allCase[0]?.entries);
   const detail = mycase?.data?.allCase?.filter((d) => d._id == id);
 
   let caseType = "NIL";
@@ -145,23 +146,40 @@ const CaseDetails = () => {
           <div className="">
             <h2 className="font-semibold mb-2">Uploaded Documents</h2>
             <div className="bg-gray-200 p-4">
-              {detail[0]?.documents.map((doc, id) => (
-                <div key={id} className=" flex gap-10 mb-3 justify-between">
-                  <div className="flex gap-5">
-                    <img width={50} src={doc.document_url} alt="" />
-                    <div className="text-sm">
-                      <h3 className="font-semibold">{doc.document_type}</h3>
-                      {/* <p>Courney Henry</p> */}
+              {detail[0]?.documents.map((doc, id) => {
+                let imageIcon = jpeg;
+                let title = "Document FIle";
+                if (doc.document_type.includes("pdf")) {
+                  imageIcon = pdf;
+                  title = "Pdf Document";
+                } else if (doc.document_type.includes("doc")) {
+                  title = "Word Document";
+                  imageIcon = docx;
+                } else if (doc.document_type.includes("xls")) {
+                  title = "Excel Document";
+                  imageIcon = xlsx;
+                } else if (doc.document_type.includes("jp" || "png" || "gif")) {
+                  title = "Image File";
+                  imageIcon = jpeg;
+                }
+                return (
+                  <div key={id} className=" flex gap-10 mb-3 justify-between">
+                    <div className="flex gap-5">
+                      <img width={50} src={imageIcon} alt="" />
+                      <div className="text-sm">
+                        <h3 className="font-semibold">{title}</h3>
+                        {/* <p>Courney Henry</p> */}
+                      </div>
+                    </div>
+                    <div className="text-xs flex gap-5">
+                      {/* <p>1.4 MB</p> */}
+                      <a href={doc.document_url} target="_blank">
+                        <p className="text-project-blue">Download</p>
+                      </a>
                     </div>
                   </div>
-                  <div className="text-xs flex gap-5">
-                    {/* <p>1.4 MB</p> */}
-                    <a href={doc.document_url} target="_blank">
-                      <p className="text-project-blue">Download</p>
-                    </a>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -172,8 +190,8 @@ const CaseDetails = () => {
           <div className="flex gap-2">
             <img src={horizontalLine} alt="horizonal color line" />
             <div>
-              {detail[0]?.upcoming_task.map((ts, id) => (
-                <SummaryCard key={id} title={ts} />
+              {detail[0]?.entries?.map((ts, id) => (
+                <SummaryCard key={id} entry={ts} />
               ))}
             </div>
           </div>

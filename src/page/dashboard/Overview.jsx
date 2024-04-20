@@ -28,6 +28,11 @@ import Doughnutchart from "../../components/Doughnutchart";
 import { useGetAllCaseQuery } from "../../service/allCase.service";
 import { useGetLastUpdateQuery } from "../../service/lastUpdate.service";
 import { extractDate } from "./../../utils/extractDate";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 ChartJS.register(ArcElement, Tooltip, CategoryScale, LinearScale, BarElement);
 defaults.font.family = "'Poppins', sans-serif";
@@ -40,10 +45,11 @@ const Overview = () => {
   const { data: monthly } = useGetMonthlyCaseQuery();
   const { data: lastUpdate } = useGetLastUpdateQuery();
 
-  console.log("Last Update:", lastUpdate?.data);
+  // console.log("Total:", totalCase?.data);
 
   // console.log("Monthyly: ", monthly?.data);
   const [loading, setLoading] = useState(true);
+  const [value, setValue] = useState("");
 
   const navigate = useNavigate();
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
@@ -58,6 +64,11 @@ const Overview = () => {
   //   }
   // };
 
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setValue(event.target.value);
+  };
+
   const dailyRef = useRef();
   const weeklyRef = useRef();
   const monthlyRef = useRef();
@@ -65,8 +76,8 @@ const Overview = () => {
 
   useEffect(() => {
     setInterval(() => {
+      // setValue(totalCase?.data?.totalcaseCount);
       setLoading(false);
-      // console.log("RECENT CASES: ", recent?.data);
     }, 3000);
   }, []);
 
@@ -196,7 +207,7 @@ const Overview = () => {
           </Link>
           {/* Second card */}
           <div>
-            <div className="justify-between h-52 pt-6 pl-4 border border-solid border-project-gray rounded-xl">
+            <div className="justify-between h-52 p-2 border border-solid border-project-gray rounded-xl">
               <p className="font-inter text-base text-project-light-black font-semibold">
                 Last updates
               </p>
@@ -208,7 +219,7 @@ const Overview = () => {
                       {dt?.entry_subject}
                     </p>
                     <div className="flex items-center justify-between">
-                      <div className="mt-3">
+                      <div className="mt-1">
                         <p className="font-poppins text-xs text-project-light-black font-semibold">
                           {dt?.entry_details}
                         </p>
@@ -253,13 +264,12 @@ const Overview = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col justify-between h-52 pt-6 border border-solid border-project-gray rounded-xl">
+            <div className="flex flex-col justify-between h-52 p-2 border border-solid border-project-gray rounded-xl">
+              <p className="font-inter text-base text-project-light-black font-semibold whitespace-nowrap">
+                Case Summary
+              </p>
               <div className="flex justify-between items-center">
-                <p className="font-inter text-base text-project-light-black font-semibold pl-4 whitespace-nowrap">
-                  Case Summary
-                </p>
-
-                <div className="mr-4 font-dmsans flex gap-2 bg-white border-project-gray">
+                <div className="mr-4 font-dmsans gap-2 bg-white h-[24px] border-project-gray">
                   {/* <Select
                     values={[{ value: "all-cases", label: "All Cases" }]}
                     dropdownHandleRenderer={({ state, methods }) => (
@@ -321,46 +331,63 @@ const Overview = () => {
                     }}
                     className="custom-outline"
                   /> */}
-                  <div>
-                    <input type="radio" name="" id="" />
-                    <label className="text-xs pl-1">Total</label>
-                  </div>
-                  <div>
-                    <input type="radio" name="" id="" />
-                    <label className="text-xs pl-1">Civil</label>
-                  </div>
-                  <div>
-                    <input type="radio" name="" id="" />
-                    <label className="text-xs pl-1">Criminal</label>
-                  </div>
+
+                  <FormControl>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <FormControlLabel
+                        value={totalCase?.data?.totalcaseCount}
+                        control={<Radio />}
+                        label="Total"
+                        // onClick={(e) => handleChange(e)}
+                      />
+                      <FormControlLabel
+                        // onClick={(e) => handleChange(e)}
+                        control={<Radio />}
+                        value={totalCase?.data?.totalClosedCase}
+                        label="Closed"
+                      />
+                      <FormControlLabel
+                        // onClick={(e) => handleChange(e)}
+                        value={totalCase?.data?.totalOpenCase}
+                        control={<Radio />}
+                        label="Open"
+                      />
+                    </RadioGroup>
+                  </FormControl>
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-between px-2 pb-6">
                 {/* previous button */}
-                <button
+                {/* <button
                   aria-label="Previous"
                   className=" p-1 hover:bg-project-gray flex justify-center items-center rounded-lg trnasition-all duration-150"
                 >
                   <img src={chevron} className="w-6 rotate-90" />
-                </button>
+                </button> */}
 
                 {/* chart */}
                 <div className="flex-1 h-[140px] w-[140px] pt-3 flex justify-center items-center">
                   {totalCase?.data?.totalcaseCount && (
                     <Doughnutchart
-                      dt={totalCase?.data?.totalcaseCount}
-                      innerTitle={"Overall"}
+                      dt={value ? value : totalCase?.data?.totalcaseCount}
+                      innerTitle={""}
                     />
                   )}
                 </div>
 
                 {/* next button */}
-                <button
+                {/* <button
                   aria-label="Previous"
                   className=" p-1 hover:bg-project-gray flex justify-center items-center rounded-lg trnasition-all duration-150"
                 >
                   <img src={chevron} className="w-6 -rotate-90" />
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

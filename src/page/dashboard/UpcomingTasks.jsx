@@ -11,15 +11,13 @@ import { useGetUpcomingTasksQuery } from "../../service/upcomingTask.service";
 
 const UpcomingTasks = () => {
   const { data: upcomingtask } = useGetUpcomingTasksQuery();
-  console.log("Upcoming: ", upcomingtask?.data);
+  console.log("Upcoming: ", upcomingtask?.data[0]);
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
   return (
     <div className="p-20 bg-white">
-      {/* First Section */}
-
       {/* Second Section */}
       <div className="flex font-poppins mb-2 gap-5 items-end">
         <div>
@@ -89,14 +87,9 @@ const UpcomingTasks = () => {
         </button>
       </div>
 
-      {upcomingtask?.data?.map((task, id) => (
+      {upcomingtask?.data[0]?.upcoming_task.map((task, id) => (
         <UpcomingTasksContainer key={id} task={task} />
       ))}
-      {/* <UpcomingTasksContainer completed={true} />
-      <UpcomingTasksContainer completed={true} />
-      <UpcomingTasksContainer />
-      <UpcomingTasksContainer />
-      <UpcomingTasksContainer /> */}
     </div>
   );
 };

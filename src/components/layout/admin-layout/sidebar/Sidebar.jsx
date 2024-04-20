@@ -86,7 +86,7 @@ const Sidebar = ({ sidebarItems }) => {
 
             {/* <p className="text-project-gray w-fit">CaseBud</p> */}
           </div>
-          <div className="w-full flex flex-col gap-y-7 relative mt-12 flex-1 overflow-scroll pb-20 hide-scrollbar">
+          <div className="w-full flex flex-col gap-y-7 relative mt-12 flex-1 pb-20 hide-scrollbar">
             {sidebarItems.map((sidebarItem, i) => {
               return (
                 <button

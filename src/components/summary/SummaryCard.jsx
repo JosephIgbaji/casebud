@@ -1,6 +1,7 @@
 import React from "react";
+import { extractDate } from "./../../utils/extractDate";
 
-const SummaryCard = ({ title }) => {
+const SummaryCard = ({ entry }) => {
   return (
     <div className="mb-3 border rounded-lg border-gray-400 min-w-[300px] max-w-[500px] p-4">
       <div className="flex justify-between items-center">
@@ -22,13 +23,11 @@ const SummaryCard = ({ title }) => {
           />
         </svg>
       </div>
-      <h4 className="my-2">{title}</h4>
-      {/* <p className="rounded-lg bg-gray-100 p-2 text-xs pr-16">
-        Lorem ipsum dolor sit amet consectetur. A nulla ullamcorper vel in amet.
-        Feugiat vel dui facilisis dictum arcu malesuada. Mauris aliquam
-        tincidunt ante hendrerit feugiat pulvinar.
-      </p> */}
-      {/* <div className="flex items-center mt-3 gap-0.5">
+      <h4 className="my-2">{entry.entry_subject}</h4>
+      <p className="rounded-lg bg-gray-100 p-2 text-xs pr-16">
+        {entry.entry_details}
+      </p>
+      <div className="flex items-center mt-3 gap-0.5">
         <div className="gap-2 flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +44,9 @@ const SummaryCard = ({ title }) => {
             />
           </svg>
 
-          <p className="text-xs text-gray-400">Mar 14</p>
+          <p className="text-xs text-gray-400">
+            {extractDate(entry.entry_date)}
+          </p>
         </div>
         <div className="flex gap-2 items-center">
           <svg
@@ -63,9 +64,11 @@ const SummaryCard = ({ title }) => {
             />
           </svg>
 
-          <p className="text-xs text-gray-400">4</p>
+          <p className="text-xs text-gray-400">
+            {entry.entry_documents.length}
+          </p>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

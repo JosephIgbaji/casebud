@@ -16,7 +16,7 @@ import { useGetAllCaseQuery } from "../../service/allCase.service";
 
 const Cases = () => {
   const { data: mycase } = useGetAllCaseQuery();
-  console.log("All cases:", mycase?.data?.allCase);
+  // console.log("All cases:", mycase?.data?.allCase);
 
   const [currentPage, setCurrentPage] = useState(1);
 

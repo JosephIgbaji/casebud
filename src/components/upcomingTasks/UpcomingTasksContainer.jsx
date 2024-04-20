@@ -31,7 +31,7 @@ const UpcomingTasksContainer = ({ task }) => {
               Summary
             </p>
           </div>
-          <h4 className="my-2">{task.upcoming_task[0]}</h4>
+          <h4 className="my-2">{task}</h4>
           {/* <p className="rounded-lg bg-gray-100 p-2 text-xs pr-16">
             Lorem ipsum dolor sit amet consectetur. A nulla ullamcorper vel in
             amet. Feugiat vel dui facilisis dictum arcu malesuada. Mauris
