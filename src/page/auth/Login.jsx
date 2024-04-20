@@ -169,7 +169,7 @@ function Login() {
         <div className="flex flex-col mt-10 w-full">
           <div className="w-full max-w-md mx-auto p-5">
             <h5 className="login-text mb-2">Login</h5>
-            <p className="login-desc pb-7">Login to the dashboard</p>
+            {/* <p className="login-desc pb-7">Login to the dashboard</p> */}
 
             <Form
               onSubmit={onSubmit}
@@ -179,7 +179,7 @@ function Login() {
                   <div className="mb-7">
                     <div className="relative w-full input-component empty sm:inline-block sm:pr-1">
                       <Field
-                        name="identifier"
+                        name="email"
                         component="input"
                         type="text"
                         className="auth-input block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0 hover:border-gray-500 focus:border-green-500 peer"
@@ -187,16 +187,16 @@ function Login() {
                       />
 
                       <label
-                        htmlFor="identifier"
+                        htmlFor="email"
                         className="auth-label absolute text-sm  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-project-green px-1 peer-focus:px-1 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                       >
                         Email/ID
                       </label>
                     </div>
                     {form.getState().submitFailed &&
-                      form.getState().errors.identifier && (
+                      form.getState().errors.email && (
                         <span className="text-red-600">
-                          {form.getState().errors.identifier}
+                          {form.getState().errors.email}
                         </span>
                       )}
                   </div>

@@ -28,14 +28,14 @@ const CaseDetails = () => {
   return (
     detail && (
       <div className="bg-white p-5">
-        <div className=" border-r borer-solid border-project-gray flex flex-wrap min-h-[298px]">
-          <div className="relative max-w-[300px] bg-[#D9D9D9] flex items-center">
+        <div className=" border-r borer-solid border-project-gray md:grid md:grid-cols-2 gap-4 lg:flex justify-between flex-wrap min-h-[298px]">
+          <div className="relative w-[300px] bg-[#D9D9D9] flex flex-1 items-center">
             <img src={noImage} className="w-[300px] m-auto" />
             <div className="absolute bottom-0 bg-gray-500 p-2 text-2xl rounded-lg w-full text-center">
               {caseType}
             </div>
           </div>
-          <div className="max-w-[350px] px-3 flex-1  text-project-light-black">
+          <div className="w-[350px] px-3 flex-1  text-project-light-black">
             <div className="">
               {/* <p className="text-sm font-medium">{detail[0]?.name}</p> */}
               <div className="mb-3 flex justify-between items-start">
@@ -77,17 +77,8 @@ const CaseDetails = () => {
               </div>
             </div>
           </div>
-          <div className="max-w-[350px] px-3 flex-1  text-project-light-black">
+          <div className="w-[350px] px-3 flex-1  text-project-light-black">
             <div className="">
-              {/* <p className="text-sm font-medium">{detail[0]?.name}</p> */}
-              {/* <div className="mb-3 flex justify-between items-start">
-                <p className=" mt-1 font-semibold leading-5">Case Status:</p>
-                <p className=" leading-5 w-1/2">
-                  <span className=" text-project-dark-green bg-project-green bg-opacity-25 rounded-xl p-1 text-xs">
-                    Ongoing
-                  </span>
-                </p>
-              </div> */}
               <div className="mb-3 flex justify-between items-start">
                 <p className=" mt-1 font-semibold leading-5">Subcase Type:</p>
                 <p className=" leading-5 w-1/2">{detail[0]?.case_area}</p>
@@ -128,7 +119,7 @@ const CaseDetails = () => {
           </div>
           <button
             aria-label="Download"
-            className="flex h-7 px-3 items-center justify-center gap-x-2 bg-project-green bg-opacity-40 hover:bg-opacity-20 transition-all rounded-full"
+            className="flex h-7 px-3 items-center max-w-[150px] justify-center gap-x-2 bg-project-green bg-opacity-40 hover:bg-opacity-20 transition-all rounded-full"
           >
             <img src={download} />
             <span className="text-[0.625rem] text-project-dark-green font-medium">
@@ -136,8 +127,8 @@ const CaseDetails = () => {
             </span>
           </button>
         </div>
-        <div className=" flex justify-between items-start">
-          <div className="mt-5">
+        <div className=" md:flex justify-between items-start">
+          <div className="mt-5 mb-5 md:mb-0">
             <h2 className="font-semibold mb-2">Case Summary/Description</h2>
             <p className="text-xs text-gray-500 w-7/12">
               {detail[0]?.case_summary}

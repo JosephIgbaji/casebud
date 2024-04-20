@@ -115,56 +115,9 @@ const Overview = () => {
     <div className="px-4">
       {/* First Section */}
       <div className="p-5 rounded-xl bg-white font-poppins">
-        {/* time range tabs*/}
-        {/* <ul className="flex font-medium text-sm relative">
-          <li
-            onClick={() => setCurrentTabIndex(0)}
-            ref={dailyRef}
-            className={`cursor-pointer border-b border-solid border-project-gray-2 p-2 px-3 flex justify-center items-center transition-all duration-300 ${activeTextStyling(
-              0
-            )}`}
-          >
-            <span>Daily</span>
-          </li>
-          <li
-            onClick={() => setCurrentTabIndex(1)}
-            ref={weeklyRef}
-            className={`cursor-pointer border-b border-solid border-project-gray-2 p-2 px-3 flex justify-center items-center transition-all duration-300 ${activeTextStyling(
-              1
-            )}`}
-          >
-            <span>Weekly</span>
-          </li>
-          <li
-            onClick={() => setCurrentTabIndex(2)}
-            ref={monthlyRef}
-            className={`cursor-pointer border-b border-solid border-project-gray-2 p-2 px-3 flex justify-center items-center transition-all duration-300 ${activeTextStyling(
-              2
-            )}`}
-          >
-            <span>Monthly</span>
-          </li>
-          <li
-            onClick={() => setCurrentTabIndex(3)}
-            ref={yearlyRef}
-            className={`cursor-pointer border-b border-solid border-project-gray-2 p-2 px-3 flex justify-center items-center transition-all duration-300 ${activeTextStyling(
-              3
-            )}`}
-          >
-            <span>Yearly</span>
-          </li>
-         //indicator
-          <li
-            className={`h-[3px] absolute -bottom-[1px] bg-black transition-all duration-300`}
-            style={{
-              left: indicatorPosition,
-              width: calculateWidth(currentTabIndex),
-            }}
-          />
-        </ul> */}
-
         {/* Summary section */}
-        <div className="grid grid-cols-3 gap-6 mt-4">
+        {/* <div className="flex flex-wrap gap-6 mt-4"> */}
+        <div className="lg:grid lg:grid-cols-3 gap-6 mt-4">
           {/* First card */}
           <Link to="/dashboard/upcoming-tasks">
             <div>
@@ -429,9 +382,11 @@ const Overview = () => {
           </button>
         </div>
         {!loading ? (
-          <div className="grid grid-cols-3 pt-4 gap-4">
+          <div className="lg:grid lg:grid-cols-3 pt-4 gap-4">
             {recent.data?.slice(0, 3)?.map((item) => (
-              <CaseCard key={item._id} details={item} />
+              <div className="mb-5 lg:mb-0">
+                <CaseCard key={item._id} details={item} />
+              </div>
             ))}
           </div>
         ) : (

@@ -26,7 +26,7 @@ const Cases = () => {
   return (
     <div className="px-4">
       {/* First Section */}
-      <div className="rounded-xl font-poppins mb-4 flex gap-5">
+      <div className="rounded-xl font-poppins mb-4 flex flex-wrap gap-5">
         {/* first card */}
         <CaseHead
           icon={handcuffs}
@@ -127,13 +127,10 @@ const Cases = () => {
 
       {/* Third Section */}
       <div className="p-5 bg-white font-poppins mt-2">
-        <div className="grid grid-cols-3 pt-4 gap-4">
+        <div className="sm:flex sm:flex-wrap lg:grid lg:grid-cols-3 pt-4 gap-4">
           {mycase?.data?.allCase.map((item) => (
             <CaseCard key={item.id} details={item} />
           ))}
-          {/* {cases.map((item) => (
-            <CaseCard key={item.id} details={item} />
-          ))} */}
         </div>
       </div>
 

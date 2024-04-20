@@ -7,7 +7,7 @@ const UpcomingTasksContainer = ({ task }) => {
     : "rounded-full border p-1";
   const color = completed ? "white" : "currentColor";
   return (
-    <div className="mb-3 border rounded-lg border-gray-400 max-w-[500px] p-4 flex justify-between">
+    <div className="mb-3 border rounded-lg border-gray-400 max-w-[300px] md:max-w-[400px] lg:max-w-[500px] p-4 flex justify-between">
       <div className="flex items-center gap-3">
         <div className={style}>
           <svg
