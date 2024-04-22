@@ -27,6 +27,7 @@ const RouterConfig = () => {
           path={routes.LOGIN}
           element={<PublicRoute component={Login} />}
         />
+        <Route path={"/"} element={<Navigate to={"/signin"} />} />
         <Route
           path={routes.DASHBOARD}
           element={<ProtectedRoute component={AdminLayout} />}
@@ -38,8 +39,8 @@ const RouterConfig = () => {
           <Route path={routes.CASEDETAIL} element={<CaseDetails />} />
           {/* <Route path={routes.REPORTS} element={<Reports />} />
           <Route path={routes.NOTIFICATIONS} element={<Reports />} /> */}
-          <Route path={routes.SETTINGS} element={<Settings />} />
-          <Route path={routes.HELP} element={<Help />} />
+          {/* <Route path={routes.SETTINGS} element={<Settings />} />
+          <Route path={routes.HELP} element={<Help />} /> */}
           <Route path={"*"} element={<Navigate to={"/signin"} />} />
         </Route>
       </Routes>

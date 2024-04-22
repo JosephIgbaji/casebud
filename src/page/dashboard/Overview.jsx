@@ -383,8 +383,8 @@ const Overview = () => {
         </div>
         {!loading ? (
           <div className="lg:grid lg:grid-cols-3 pt-4 gap-4">
-            {recent.data?.slice(0, 3)?.map((item) => (
-              <div className="mb-5 lg:mb-0">
+            {recent.data?.slice(0, 3)?.map((item, id) => (
+              <div key={id} className="mb-5 lg:mb-0">
                 <CaseCard key={item._id} details={item} />
               </div>
             ))}
