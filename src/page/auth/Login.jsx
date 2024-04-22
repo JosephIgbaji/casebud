@@ -57,8 +57,8 @@ function Login() {
                 <div className="md:flex md:justify-center">
                   <img
                     src={case_bud}
-                    alt="Nigerian Police Force Logo"
-                    className="w-24 h-24"
+                    alt="case bud Logo"
+                    className="w-48 h-48"
                   />
                 </div>
                 {/* <h4 className="logo-head">THE NIGERIAN POLICE FORCE</h4> */}
@@ -66,7 +66,7 @@ function Login() {
               <p className="text-project-green">
                 Case management for every lawyer
               </p>
-              <img src={scale} alt="Scale" className="mt-4" />
+              {/* <img src={scale} alt="Scale" className="mt-4" /> */}
             </div>
           </div>
         </div>
