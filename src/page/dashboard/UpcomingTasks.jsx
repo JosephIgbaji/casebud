@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DatePicker from "react-datepicker";
 // import chevron from "../../assets/titlebar/chevron.svg";
@@ -11,7 +11,18 @@ import { useGetUpcomingTasksQuery } from "../../service/upcomingTask.service";
 
 const UpcomingTasks = () => {
   const { data: upcomingtask } = useGetUpcomingTasksQuery();
-  console.log("Upcoming: ", upcomingtask?.data[0]);
+  console.log("Upcoming: ", upcomingtask?.data);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const myTasks = [];
+    for (let i = 0; i < upcomingtask?.data?.length; i++) {
+      for (let j = 0; j < upcomingtask?.data[i].upcoming_task.length; j++) {
+        myTasks.push(upcomingtask?.data[i].upcoming_task[j]);
+      }
+    }
+    setTasks(myTasks);
+  }, [upcomingtask]);
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
@@ -87,9 +98,17 @@ const UpcomingTasks = () => {
         </button>
       </div>
 
-      {upcomingtask?.data[0]?.upcoming_task.map((task, id) => (
-        <UpcomingTasksContainer key={id} task={task} />
-      ))}
+      {/* {upcomingtask?.data?.upcoming_task.map((task, id) => ( */}
+      {tasks &&
+        tasks.map((task, id) => (
+          <UpcomingTasksContainer key={id} task={task} />
+        ))}
+
+      {/* {upcomingtask?.data?.map((up) => {
+        up.upcoming_task.map((task, id) => (
+          <UpcomingTasksContainer key={id} task={task} />
+        ));
+      })} */}
     </div>
   );
 };

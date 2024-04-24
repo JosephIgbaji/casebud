@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import increase from "../../assets/overview/increase.svg";
 import decrease from "../../assets/overview/decrease.svg";
 import chevron from "../../assets/titlebar/chevron.svg";
@@ -45,11 +45,11 @@ const Overview = () => {
   const { data: monthly } = useGetMonthlyCaseQuery();
   const { data: lastUpdate } = useGetLastUpdateQuery();
 
-  // console.log("Total:", totalCase?.data);
+  // console.log("Total:", lastUpdate?.data);
 
   // console.log("Monthyly: ", monthly?.data);
   const [loading, setLoading] = useState(true);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(totalCase?.data?.totalcaseCount);
   const [ttl, setTtl] = useState("Total");
 
   const navigate = useNavigate();
@@ -77,10 +77,10 @@ const Overview = () => {
   const yearlyRef = useRef();
 
   useEffect(() => {
-    setInterval(() => {
-      // setValue(totalCase?.data?.totalcaseCount);
-      setLoading(false);
-    }, 3000);
+    // setInterval(() => {
+    setValue(totalCase?.data?.totalcaseCount);
+    setLoading(false);
+    // }, 3000);
   }, []);
 
   useEffect(() => {
@@ -190,28 +190,30 @@ const Overview = () => {
                           </span>
                         </p>
                       </div>
-                      <button className="rounded-lg bg-project-green text-white p-1 flex gap-2 items-center">
-                        <p className="text-xs">View Details</p>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                          />
-                        </svg>
-                      </button>
+                      <Link to={`/dashboard/cases/${dt._id}`}>
+                        <button className="rounded-lg bg-project-green text-white p-1 flex gap-2 items-center">
+                          <p className="text-xs">View Details</p>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                          </svg>
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -290,9 +292,10 @@ const Overview = () => {
                   <FormControl>
                     <RadioGroup
                       row
-                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      aria-labelledby="demo-row-radCio-buttons-group-label"
                       name="row-radio-buttons-group"
-                      value={value}
+                      value={value || totalCase?.data?.totalcaseCount}
+                      // defaultValue={totalCase?.data?.totalcaseCount}
                       onChange={handleChange}
                     >
                       <FormControlLabel
@@ -317,6 +320,35 @@ const Overview = () => {
                       />
                     </RadioGroup>
                   </FormControl>
+                  {/* <div>
+                    <label>
+                      <input
+                        type="radio"
+                        value={totalCase?.data?.totalcaseCount}
+                        checked={value === totalCase?.data?.totalcaseCount}
+                        onChange={handleChange}
+                      />
+                      Total
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value={totalCase?.data?.totalClosedCase}
+                        checked={value === totalCase?.data?.totalClosedCase}
+                        onChange={handleChange}
+                      />
+                      Closed
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value={totalCase?.data?.totalOpenCase}
+                        checked={value === totalCase?.data?.totalOpenCase}
+                        onChange={handleChange}
+                      />
+                      Open
+                    </label>
+                  </div> */}
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-between px-2 pb-6">
@@ -331,14 +363,11 @@ const Overview = () => {
                 {/* chart */}
                 <div className="flex-1 h-[140px] w-[140px] pt-3 flex justify-center items-center">
                   {totalCase?.data?.totalcaseCount && (
-                    <Doughnutchart
-                      dt={value ? value : totalCase?.data?.totalcaseCount}
-                      innerTitle={""}
-                    />
+                    <Doughnutchart dt={value} innerTitle={""} />
                   )}
                   {totalCase?.data?.totalcaseCount && (
                     <p className="pl-2">
-                      {ttl}: {value ? value : totalCase?.data?.totalcaseCount}
+                      {ttl}: {value}
                     </p>
                   )}
                 </div>
@@ -383,7 +412,7 @@ const Overview = () => {
         </div>
         {!loading ? (
           <div className="lg:grid lg:grid-cols-3 pt-4 gap-4">
-            {recent.data?.slice(0, 3)?.map((item, id) => (
+            {recent?.data?.slice(0, 3)?.map((item, id) => (
               <div key={id} className="mb-5 lg:mb-0">
                 <CaseCard key={item._id} details={item} />
               </div>
@@ -397,4 +426,4 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+export default React.memo(Overview);
